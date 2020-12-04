@@ -10,7 +10,7 @@ if (!ci) {
 document.getElementById("name").value = c;
 document.getElementById("rs").value = ci.message;
 
-function removeCmd(){
+function delCmd(){
     Swal.fire({
         title: "T'es sûr ?",
         text: "Est-ce que je supprime vraiment cette commande ?",
