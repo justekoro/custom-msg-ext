@@ -22,6 +22,14 @@ body{
     top:45%;
     left:50%;
 }
+.main-c{
+    z-index:10;
+    width:250px;
+    height:370px;
+    background:#ffffff;
+    top:40%;
+    left:50%;
+}
 .list{
     z-index:10;
     width:250px;
