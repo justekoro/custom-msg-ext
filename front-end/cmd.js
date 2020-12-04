@@ -10,6 +10,28 @@ if (!ci) {
 document.getElementById("name").value = c;
 document.getElementById("rs").value = ci.message;
 
+function removeCmd(){
+    Swal.fire({
+        title: "T'es sûr ?",
+        text: "Est-ce que je supprime vraiment cette commande ?",
+        showDenyButton: true,
+        denyButtonText: "NON, SURTOUT PAS !",
+        confirmButtonText: "Vas y, tu peux la supprimer."
+    }).then((result) => {
+        if (result.isConfirmed) {
+            console.log("Preparing to remove");
+            console.log(`Command name: ${c}`);
+            console.log("Deleting data");
+            delete configData[c];
+            console.log("Removing from command list");
+            configData[" "] = configData[" "].filter(e => e != c);
+            console.log("Successfully removed");
+            console.log("Saving");
+            ipcRenderer.send("saveConfigData", {"config": configData, "extensionId": "custom-msg-ext", "botId": parent.currentBotOpenId});
+        }
+    })
+}
+
 function editCmd(){
     // Retreive content
     const rss = document.getElementById("rs").value;
@@ -71,7 +93,7 @@ ipcRenderer.on("saveConfigData", (event, result) => {
             position: 'top-end',
             icon: 'success',
             title: "C'est bon !",
-            text: "Ta commande a été éditée, on va te rediriger vers la page principale !",
+            text: "Ta commande a été éditée / supprimée, on va te rediriger vers la page principale !",
             timer: 1500,
             timerProgressBar: true,
             willClose: () => {
