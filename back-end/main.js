@@ -14,6 +14,7 @@ module.exports = {
         bot.on('message', message => {
             // Check if the command has been added
             if (cd[message.content.substr(prefix.length)]) {
+                if (!message.content.startsWith(prefix)) return;
                 const msg = cd[message.content.substr(prefix.length)].message
                     .replace(/\{author}/g, `<@${message.author.id}>`)
                 message.channel.send(msg)
